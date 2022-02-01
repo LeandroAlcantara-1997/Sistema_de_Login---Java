@@ -1,5 +1,7 @@
 package com.github.leandroalcantara_1997.api_sistema_login.service;
 
+import java.util.List;
+
 import com.github.leandroalcantara_1997.api_sistema_login.entity.User;
 import com.github.leandroalcantara_1997.api_sistema_login.exception.DataBaseException;
 import com.github.leandroalcantara_1997.api_sistema_login.exception.UtilException;
@@ -45,8 +47,9 @@ public class UserService {
     }
 
     public User getLogin(String user, String senha) throws Exception {
-        User userData = userRepository.findByUser(user).orElseThrow(() -> new DataBaseException("Erro ao retornar usuário"));
-        if (user == null){
+        User userData = userRepository.findByUser(user)
+                .orElseThrow(() -> new DataBaseException("Erro ao retornar usuário"));
+        if (user == null) {
             throw new DataBaseException("Erro ao retornar usuário");
         }
         compareToLogin(user, senha, userData);
@@ -64,5 +67,10 @@ public class UserService {
         if (!log) {
             throw new UtilException("Senha ou user inválido");
         }
+    }
+
+    public List<User> getAll(){
+        List<User> user = userRepository.findAll();
+        return user;
     }
 }

@@ -1,5 +1,7 @@
 package com.github.leandroalcantara_1997.api_sistema_login.controller;
 
+import java.util.List;
+
 import com.github.leandroalcantara_1997.api_sistema_login.entity.User;
 import com.github.leandroalcantara_1997.api_sistema_login.service.UserService;
 
@@ -51,11 +53,18 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
     }
 
-    @GetMapping(value="/get/login")
+    @PostMapping(value="/get/login")
     public ResponseEntity<User> login(@RequestParam String user, @RequestParam String senha) throws Exception {
         User userData = userService.getLogin(user, senha);
         return ResponseEntity.status(HttpStatus.FOUND).body(userData);
     }
+
+    @GetMapping(value="get/all")
+    public ResponseEntity<List<User>> getAll() {
+        List<User> user = userService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+    
     
    
 }
