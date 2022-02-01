@@ -40,9 +40,9 @@ public class UserController {
     
     @DeleteMapping(value = "/delete/{id}")
     //@PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Cadastro deletado com sucesso");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 
     @PutMapping(value="put/{id}")
